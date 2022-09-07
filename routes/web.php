@@ -22,7 +22,12 @@ Route::get('/selected_category/{category}', [
     'uses' => 'App\Http\Controllers\HomepageController@category',
 ]);
 
-Route::get('/page', [
+Route::get('/page/contact',[
+    'as'=>'contact_page',
+    'uses' => 'App\Http\Controllers\HomepageController@contact',
+]);
+
+Route::get('/page/{pageName}', [
     'as' => 'page',
     'uses' => 'App\Http\Controllers\HomepageController@getPage',
 ]);

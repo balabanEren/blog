@@ -11,37 +11,68 @@ use App\Models\article;
 
 class HomepageController extends Controller
 {
+  public function __construct(){
+      view()->share("pages",Page::query()->orderBy("order", "ASC")->get());
+  }
+
     public function index()
     {
-        $data["articles"] = article::query()->orderBy("created_at", "DESC")->simplePaginate(3);
-        $data["articles"]->withPath(url("/paginateArtical"));
-        $data["categories"] = category::all();
-        $data["pages"] = Page::query()->orderBy("order", "ASC")->get();
-        return view("front.homepage", $data);
+        $articles = article::query()->orderBy("created_at", "DESC")->simplePaginate(3);
+        $articles->withPath(url("/paginateArtical"));
+        $categories = category::all();
+        $pages = Page::query()->orderBy("order", "ASC")->get();
+        return view("front.homepage", compact([
+            'articles',
+            'categories',
+            'pages'
+        ]));
     }
 
     public function single($slug)
     {
         $artical = Article::query()->where("slug", $slug)->first() ?? abort(404, "Not found");
         $artical->increment("hit");
-        $data["artical"] = $artical;
-        $data["categories"] = category::all();
-        return view("front.single", $data);
+        $categories = category::all();
+        return view("front.single", compact([
+            'artical',
+            'categories'
+
+        ]));
     }
 
     public function category($slug)
     {
         $category = Category::query()->whereSlug($slug)->first() ?? abort(404, "Not found");
-        $data["categories"] = category::all();
-        $data["category"] = $category;
-        $data["articles"] = Article::query()->where("category_id", $category->id)->orderBy("created_at", "DESC")->simplePaginate(1);
-        $data["pages"] = Page::query()->orderBy("order", "ASC")->get();
-        return view("front.category", $data);
+        $categories = category::all();
+        $articles = Article::query()->where("category_id", $category->id)->orderBy("created_at", "DESC")->simplePaginate(1);
+        $pages = Page::query()->orderBy("order", "ASC")->get();
+        return view("front.category", compact([
+            'articles',
+            'categories',
+            'pages',
+            'category'
+        ]));
     }
 
-    public function getPage()
+    public function getPage($pageName)
     {
-        dd('asd');
+
+        $pages = Page::query()->orderBy("order", "ASC")->get();
+        $currentPage = $pages->where('slug', '=', $pageName)->first();
+
+        if (!$currentPage) {
+            return "Not Found";
+        }
+
+        return view("front.page", compact([
+            // 'page',
+            'pages',
+            'currentPage',
+        ]));
+
+    }
+    public function contact(){
+        return view("front.contact");
     }
 
 }

@@ -6,7 +6,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>@yield("title","Blog Site(ALT)")</title>
-    <link rel="icon" type="image/x-icon" href="{{asset("front/")}}/assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="{{asset("front/")}}/assets/favicon.ico"/>
     <!-- Font Awesome icons (free version)-->
     <script src="{{asset("front/")}}/https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -30,7 +30,7 @@
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{route("homepage")}}">Home</a></li>
                 @foreach($pages as $page)
 
-                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="">{{$page->title}}</a></li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{route("page",$page->slug)}}">{{$page->title}}</a></li>
                 @endforeach
             </ul>
         </div>

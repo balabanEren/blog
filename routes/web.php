@@ -31,3 +31,9 @@ Route::get('/page/{pageName}', [
     'as' => 'page',
     'uses' => 'App\Http\Controllers\HomepageController@getPage',
 ]);
+
+Route::post("contact",[
+    'as'=>'contact_post',
+    'uses'=>'App\Http\Controllers\HomepageController@postContact'
+
+]);

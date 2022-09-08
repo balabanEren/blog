@@ -4,7 +4,7 @@
             <a href="{{route("blok_single",$article->slug)}}">
                 <h2 class="post-title">{{$article->title}}</h2>
 
-                <img src="{{ asset('storage/PHP_image/'.$article->image) }}" class="thumb_image">
+                <img src="{{ asset('front/storage/PHP_image/'.$article->image) }}" class="thumb_image">
 
                 <h3 class="post-subtitle">{{Str::limit($article->context,50)}}</h3>
             </a>

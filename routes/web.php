@@ -2,6 +2,34 @@
 
 use Illuminate\Support\Facades\Route;
 
+
+
+
+/*__________
+ * Back Router(admin)
+ * _______
+ * */
+Route::get("admin/panel",[
+    'as' => 'admin_dasboard',
+    'uses' => 'App\Http\Controllers\AdminControl@index',
+]);
+
+Route::get("/admin/login",[
+    'as' => 'login',
+    'uses' => 'App\Http\Controllers\AdminControl@login',
+]);
+
+Route::post("/admin/log",[
+    'as' => 'login_post',
+    'uses' => 'App\Http\Controllers\AdminControl@loginPost',
+]);
+
+
+
+/*__________
+ * Front Router
+ * _______
+ * */
 Route::get('/', [
     'as' => 'homepage',
     'uses' => 'App\Http\Controllers\HomepageController@index',
@@ -32,7 +60,7 @@ Route::get('/page/{pageName}', [
     'uses' => 'App\Http\Controllers\HomepageController@getPage',
 ]);
 
-Route::post("contact",[
+Route::post("/contact",[
     'as'=>'contact_post',
     'uses'=>'App\Http\Controllers\HomepageController@postContact'
 

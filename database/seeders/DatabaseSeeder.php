@@ -24,5 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call(category_seeder::class);
         $this->call(articalSeeder::class);
         $this->call(pageSeeder::class);
+        $this->call(AdminSeeder::class);
     }
 }
